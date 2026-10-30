@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>شات سوالف اليمن</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body{margin:0;background:#101022;color:#fff;font-family:Tahoma;display:flex;flex-direction:column;height:100vh}
+header{background:#e94560;padding:12px;text-align:center;font-weight:bold}
+#chat{flex:1;padding:10px;overflow:auto}
+#chat div{background:#1e2a4a;margin:5px;padding:8px;border-radius:8px}
+#bar{display:flex;padding:8px;background:#16213e}
+#bar input{flex:1;padding:10px;border-radius:20px;border:0}
+#bar button{background:#e94560;color:#fff;border:0;border-radius:20px;padding:10px 15px;margin-right:5px}
+</style>
+</head>
+<body>
+<header>🇾🇪 شات سوالف اليمن 🇾🇪</header>
+<div id="chat"><div>اهلا وسهلا بكم</div></div>
+<div id="bar"><input id="m" placeholder="اكتب هنا..."><button onclick="document.getElementById('chat').innerHTML+='<div>'+document.getElementById('m').value+'</div>';document.getElementById('m').value=''">ارسال</button></div>
+</body>
+</html>
