@@ -1,22 +1,85 @@
 <!DOCTYPE html>
-<html dir="rtl">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>شات سوالف اليمن</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-body{margin:0;background:#101022;color:#fff;font-family:Tahoma;display:flex;flex-direction:column;height:100vh}
-header{background:#e94560;padding:12px;text-align:center;font-weight:bold}
-#chat{flex:1;padding:10px;overflow:auto}
-#chat div{background:#1e2a4a;margin:5px;padding:8px;border-radius:8px}
-#bar{display:flex;padding:8px;background:#16213e}
-#bar input{flex:1;padding:10px;border-radius:20px;border:0}
-#bar button{background:#e94560;color:#fff;border:0;border-radius:20px;padding:10px 15px;margin-right:5px}
+body{margin:0;background:#111 url('https://www.transparenttextures.com/patterns/dark-mosaic.png');font-family:Tahoma;color:#fff}
+.header{background:linear-gradient(#c00,#600);padding:12px;text-align:center;font-size:22px;font-weight:bold;border-bottom:3px solid gold}
+.container{display:flex;height:85vh}
+.users{width:160px;background:#1e1e1e;border-left:2px solid gold;padding:5px}
+.users h3{background:#c00;color:#fff;padding:6px;margin:0 0 5px 0;text-align:center;font-size:14px}
+.user{background:#333;margin:4px 0;padding:7px;border-radius:6px;font-size:13px;color:#ffcc00;border-right:3px solid gold}
+.chat-area{flex:1;display:flex;flex-direction:column;background:#ddd}
+#msgs{flex:1;padding:10px;overflow-y:auto;background:#f0f0f0;color:#000}
+.msg{background:#fff;padding:8px 12px;margin:5px 0;border-radius:10px;border:1px solid #ccc;max-width:85%}
+.msg b{color:#c00}
+#bar{display:flex;padding:8px;background:#222;gap:5px}
+#bar input{flex:1;padding:12px;border-radius:20px;border:1px solid gold}
+#bar button{background:gold;color:#000;border:none;padding:10px 18px;border-radius:20px;font-weight:bold}
+.login{position:fixed;top:0;left:0;width:100%;height:100%;background:#000000e6;display:flex;justify-content:center;align-items:center;z-index:999}
+.login-box{background:#222;padding:25px;border-radius:12px;border:2px solid gold;text-align:center;width:280px}
+.login-box h2{color:gold}
+.login-box input{padding:12px;width:90%;border-radius:8px;border:none;margin:10px 0;text-align:center}
+.login-box button{background:gold;color:#000;padding:12px 30px;border:none;border-radius:8px;font-weight:bold;font-size:16px;width:100%}
 </style>
 </head>
 <body>
-<header>🇾🇪 شات سوالف اليمن 🇾🇪</header>
-<div id="chat"><div>اهلا وسهلا بكم</div></div>
-<div id="bar"><input id="m" placeholder="اكتب هنا..."><button onclick="document.getElementById('chat').innerHTML+='<div>'+document.getElementById('m').value+'</div>';document.getElementById('m').value=''">ارسال</button></div>
+<div class="header">🇾🇪 شات سوالف اليمن - Yemen Chat 🇾🇪</div>
+<div class="container">
+<div class="users">
+<h3>المتواجدين</h3>
+<div class="user">👑 سوبر مان</div>
+<div class="user">⭐ يمني حر</div>
+<div class="user">🌹 صنعانية</div>
+<div id="online"></div>
+</div>
+<div class="chat-area">
+<div id="msgs">
+<div class="msg"><b>الادارة:</b> اهلا بكم في شات سوالف اليمن الرسمي ❤️🇾🇪</div>
+</div>
+<div id="bar">
+<input id="m" placeholder="اكتب رسالتك هنا...">
+<button onclick="send()">ارسال</button>
+</div>
+</div>
+</div>
+
+<div class="login" id="login">
+<div class="login-box">
+<h2>🇾🇪 شات سوالف اليمن</h2>
+<p>اكتب اسمك للدخول</p>
+<input id="name" placeholder="اسمك المستعار">
+<button onclick="enter()">دخول الشات</button>
+</div>
+</div>
+
+<script>
+let myName="";
+function enter(){
+let n=document.getElementById('name').value.trim();
+if(!n)return alert('اكتب اسمك');
+myName=n;
+document.getElementById('login').style.display='none';
+let d=document.createElement('div');d.className='user';d.textContent='● '+myName;
+document.getElementById('online').appendChild(d);
+addMsg('الادارة','مرحبا '+myName+' نورت شات اليمن 👋');
+}
+function addMsg(name,text){
+let div=document.createElement('div');div.className='msg';
+div.innerHTML='<b>'+name+':</b> '+text;
+document.getElementById('msgs').appendChild(div);
+document.getElementById('msgs').scrollTop=999999;
+}
+function send(){
+let input=document.getElementById('m');
+let t=input.value.trim();
+if(!t||!myName)return;
+addMsg(myName,t);
+input.value='';
+}
+document.getElementById('m').addEventListener('keypress',function(e){if(e.key==='Enter')send();});
+</script>
 </body>
 </html>
